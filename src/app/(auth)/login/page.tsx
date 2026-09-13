@@ -1,0 +1,8 @@
+import { LoginFormComponent } from '@/components/auth/LoginFormComponent'
+import React from 'react'
+
+export default function Login() {
+  return (
+    <LoginFormComponent/>
+  )
+}
