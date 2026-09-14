@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "next/link"
 import {
   ArrowRight,
   ShieldCheck,
@@ -6,8 +6,17 @@ import {
   RotateCcw,
   Sparkles,
   ShoppingBag,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+} from "lucide-react"
+
+import { Button } from "@/components/ui/button"
+import type { Metadata } from "next"
+
+// Static SEO metadata
+export const metadata: Metadata = {
+  title: "Hak-Store",
+  description:
+    "Hak-Store is a modern e-commerce platform for shopping products online in Cambodia.",
+}
 
 const features = [
   {
@@ -25,7 +34,7 @@ const features = [
     title: "Hassle-Free Returns",
     desc: "Not satisfied? Return any unopened package within 30 days for a full refund.",
   },
-];
+]
 
 export default function HomePage() {
   return (
@@ -57,23 +66,21 @@ export default function HomePage() {
             {/* CTA Buttons */}
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <Button
-                asChild
                 size="lg"
+                render={<Link href="/data-table" />}
                 className="group relative overflow-hidden px-8 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-lg"
               >
-                <Link href="/data-table">
-                  Browse Catalog
-                  <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
+                Browse Catalog
+                <ArrowRight className="ml-2 size-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
 
               <Button
-                asChild
                 variant="outline"
                 size="lg"
+                render={<Link href="#features" />}
                 className="transition-transform duration-200 hover:scale-105"
               >
-                <Link href="#features">Learn More</Link>
+                Learn More
               </Button>
             </div>
           </div>
@@ -81,20 +88,25 @@ export default function HomePage() {
       </section>
 
       {/* Features Grid */}
-      <section id="features" className="container mx-auto px-4 sm:px-8">
+      <section
+        id="features"
+        className="container mx-auto px-4 sm:px-8"
+      >
         <div className="grid gap-8 md:grid-cols-3">
-          {features.map((feature, idx) => (
+          {features.map((feature) => (
             <div
-              key={idx}
+              key={feature.title}
               className="group relative rounded-2xl border border-border/60 bg-card p-8 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
             >
               <div className="mb-4 inline-flex size-12 items-center justify-center rounded-xl bg-accent/60 transition-transform duration-300 group-hover:scale-110">
                 {feature.icon}
               </div>
+
               <h3 className="text-lg font-semibold text-foreground">
                 {feature.title}
               </h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 {feature.desc}
               </p>
             </div>
@@ -109,22 +121,22 @@ export default function HomePage() {
             <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
               Ready to view all products?
             </h2>
+
             <p className="mt-2 text-sm text-muted-foreground sm:text-base">
               Explore inventory details, prices, categories, and real customer
               reviews directly inside our interactive table view.
             </p>
+
             <Button
-              asChild
+              render={<Link href="/data-table" />}
               className="mt-6 gap-2 transition-transform duration-200 hover:scale-105"
             >
-              <Link href="/data-table">
-                <ShoppingBag className="size-4" />
-                Open Data Table
-              </Link>
+              <ShoppingBag className="size-4" />
+              Open Data Table
             </Button>
           </div>
         </div>
       </section>
     </div>
-  );
+  )
 }

@@ -73,7 +73,7 @@ export function LoginFormComponent() {
   }
 
   return (
-    <Card className="w-full sm:max-w-md">
+    <Card className="w-full sm:max-w-md mx-auto ">
       <Toaster/>
       <CardHeader>
         <CardTitle>Login</CardTitle>

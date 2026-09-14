@@ -1,34 +1,56 @@
-'use client'
-import { columns, ProductType } from "./columns"
-import { DataTable } from "./data-table"
-import useSWR from 'swr'
+"use client"
 
-async function getData(): Promise<ProductType[]> {
-  // Fetch data from your API here.
-  return [
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    // ...
-  ]
+import useSWR from "swr"
+
+import { columns, type ProductType } from "./columns"
+import { DataTable } from "./data-table"
+
+const fetcher = async (url: string): Promise<ProductType[]> => {
+  const response = await fetch(url)
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch products")
+  }
+
+  const data: ProductType[] = await response.json()
+
+  return data
 }
 
-
-
-const fetcher = (url:string) => fetch(url).then((r) => r.json())
-.then((data:ProductType[]) => data)
 export default function ProductDataTable() {
-  const {data, error, isLoading} = useSWR('https://fakestoreapi.com/products', fetcher);
+  const {
+    data,
+    error,
+    isLoading,
+  } = useSWR<ProductType[]>(
+    "https://fakestoreapi.com/products",
+    fetcher
+  )
 
-  if (error) return <div>failed to load</div>
-  if (isLoading) return <div>Loading... </div>
+  if (error) {
+    return (
+      <div className="container mx-auto py-10">
+        <p className="text-red-500">
+          Failed to load products.
+        </p>
+      </div>
+    )
+  }
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto py-10">
+        <p>Loading...</p>
+      </div>
+    )
+  }
 
   return (
     <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={data} />
+      <DataTable
+        columns={columns}
+        data={data ?? []}
+      />
     </div>
   )
 }

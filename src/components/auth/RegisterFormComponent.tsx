@@ -89,7 +89,7 @@ export function RegisterFormComponent() {
   }
 
   return (
-    <Card className="w-full sm:max-w-md">
+    <Card className="w-full sm:max-w-md mx-auto">
       <Toaster />
       <CardHeader>
         <CardTitle>Register</CardTitle>
