@@ -30,7 +30,7 @@ const navItems: NavItem[] = [
   },
   {
     label: "Products",
-    href: "/data-table",
+    href: "/product",
     icon: <ShoppingBag className="size-4" />,
   },
   {
